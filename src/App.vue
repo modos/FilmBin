@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-import MoviesPanel from "@/components/MoviesPanel.vue";
+import MoviesPanel from "@/views/MoviesPanel.vue";
 </script>
 
 <template>

@@ -1,7 +1,8 @@
 <template>
     <div class="bg-primary h-[calc(100dvh)] flex flex-col items-center justify-center gap-3">
-    <MoviesSearch v-if="isSearching" @results="showResults"/>
-    <MoviesSearchResults v-else :items="searchResults" @return="isSearching = true"/>
+    <MoviesSearch v-if="showingPanel === 'search'" @results="showResults"/>
+    <MoviesSearchResults v-else-if="showingPanel === 'results'" :items="searchResults" @return="showingPanel = 'search'" @select="itemSelected"/>
+        <SingleItem v-else-if="showingPanel === 'single'" :href="href" @return="showingPanel = 'search'"/>
     </div>
 </template>
 
@@ -11,13 +12,20 @@ import {ref} from 'vue';
 import MoviesSearch from "@/components/moviesPanel/MoviesSearch.vue";
 import MoviesSearchResults from "@/components/moviesPanel/MoviesSearchResults.vue";
 import type movieSearchResultItem from "@/interfaces/moviesSearchResultsInterface";
+import SingleItem from "@/components/moviesPanel/SingleItem.vue";
 
 const searchResults: Ref<Array<movieSearchResultItem>> = ref([]);
-const isSearching: Ref<boolean> = ref(true);
+const showingPanel: Ref<string> = ref("search");
+const href: Ref<string> = ref('');
+
 function showResults(items: Array<movieSearchResultItem>) {
     searchResults.value = items;
-    isSearching.value = false;
+    showingPanel.value = "results";
+}
 
+function itemSelected(link) {
+    href.value = link;
+    showingPanel.value = "single";
 }
 
 </script>

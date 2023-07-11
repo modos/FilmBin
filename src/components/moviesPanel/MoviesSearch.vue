@@ -11,7 +11,7 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
 import { computed, ref } from 'vue'
-import movieSearchResultItem from '@/interfaces/moviesSearchResultsInterface'
+import type movieSearchResultItem from '@/interfaces/moviesSearchResultsInterface'
 
 const emit = defineEmits(['results'])
 

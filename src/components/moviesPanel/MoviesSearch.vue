@@ -2,7 +2,7 @@
   <input
     v-model="query"
     @change="search"
-    placeholder="نام فیلم رو جستجو کنید..."
+    placeholder="نام فیلم و سریال رو جستجو کنید..."
     class="w-[50%] px-8 py-4 rounded"
   />
   <LoadingSVG v-if="isLoading" />

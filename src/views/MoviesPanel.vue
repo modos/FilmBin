@@ -1,6 +1,6 @@
 <template>
   <div class="bg-primary h-[calc(100dvh)] flex flex-col items-center justify-center gap-3">
-    <MoviesSearch v-if="showingPanel === 'search'" @results="showResults" />
+    <MoviesSearch v-if="showingPanel === 'search'" @results="showResults" @start-search="isLoading = true"/>
     <MoviesSearchResults
       v-else-if="showingPanel === 'results'"
       :items="searchResults"
@@ -29,6 +29,7 @@ const showingPanel: Ref<string> = ref('search')
 const selectedItemType: Ref<boolean> = ref('movie')
 const href: Ref<string> = ref('')
 
+
 function showResults(items: Array<movieSearchResultItem>) {
   searchResults.value = items
   showingPanel.value = 'results'
@@ -40,5 +41,3 @@ function itemSelected(link: string, type: string) {
   showingPanel.value = 'single'
 }
 </script>
-
-<style scoped></style>

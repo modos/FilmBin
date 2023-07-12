@@ -5,15 +5,18 @@
     placeholder="نام فیلم رو جستجو کنید..."
     class="w-[50%] px-8 py-4 rounded"
   />
-  <button class="bg-secondary py-2 px-4 text-white rounded">جستجو</button>
+  <LoadingSVG v-if="isLoading" />
+  <button v-else class="bg-secondary py-2 px-4 text-white rounded">جستجو</button>
 </template>
 
 <script setup lang="ts">
 import type { Ref } from 'vue'
 import { computed, ref } from 'vue'
 import type movieSearchResultItem from '@/interfaces/moviesSearchResultsInterface'
+import LoadingSVG from '@/assets/icons/LoadingSVG.vue'
 
-const emit = defineEmits(['results'])
+const emit = defineEmits(['results', 'startSearch'])
+const isLoading: Ref<boolean> = ref(false)
 
 const query: Ref<string> = ref('')
 const baseUrl = computed(
@@ -23,6 +26,7 @@ const baseUrl = computed(
 const items: Ref<Array<movieSearchResultItem>> = ref([])
 
 function search() {
+  isLoading.value = true
   fetch(baseUrl.value)
     .then((res) =>
       res.json().then((body) => {
@@ -40,9 +44,17 @@ function search() {
       })
     )
     .then(() => {
+      isLoading.value = false
       emit('results', items.value)
     })
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+svg {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 64px !important;
+    height: 64px !important;
+}
+</style>

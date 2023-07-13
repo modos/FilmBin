@@ -10,3 +10,34 @@ html,body {
     min-width: 500px;
     min-height: 600px;
 }
+
+@font-face {
+    font-family: Vazir;
+    font-weight: 400;
+    src: url('./Vazir.ttf') format('truetype')
+}
+
+* {
+    direction: rtl;
+    font-family: Vazir, sans-serif;
+}
+
+::-webkit-scrollbar {
+    height: 4px;
+    width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #212121;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

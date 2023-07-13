@@ -1,12 +1,13 @@
 <template>
   <input
+          type="search"
     v-model="query"
     @change="search"
     placeholder="نام فیلم و سریال رو جستجو کنید..."
-    class="w-[50%] px-8 py-4 rounded"
+    class="w-[75%] px-8 py-4 rounded"
   />
   <LoadingSVG v-if="isLoading" />
-  <button v-else class="bg-secondary py-2 px-4 text-white rounded">جستجو</button>
+  <button v-else class="bg-secondary py-2 px-4 text-white rounded w-[50%]">جستجو</button>
 </template>
 
 <script setup lang="ts">

@@ -2,19 +2,19 @@
   <button class="text-white bg-secondary py-2 px-4 rounded" @click="emit('return')">بازگشت</button>
     <LoadingSVG v-if="isLoading"/>
     <div v-else>
-        <ul v-if="props.type === 'series'" class="h-[300px] overflow-y-auto w-[75%]">
-            <li v-for="(item, i) in links" :key="i">
+        <ul v-if="props.type === 'series'" class="h-[300px] overflow-y-auto w-full">
+            <li class="w-[400px]" v-for="(item, i) in links" :key="i">
                 <span class="text-white">{{ item.title }}</span>
                 <span v-html="item.details" class="flex gap-3 text-green-400"></span>
                 <ul class="mt-2">
-                    <li class="bg-yellow-400 py-2 px-8 rounded mb-4" v-for="(link, j) in item.links" :key="j">
+                    <li class="bg-yellow-400 py-2 px-8 rounded mb-4 flex justify-between" v-for="(link, j) in item.links" :key="j">
                         <a :href="link.link">{{ link.spans }}</a>
                     </li>
                 </ul>
             </li>
         </ul>
-        <ul v-else class="h-[300px] overflow-y-auto">
-            <li v-for="(item, i) in links" :key="i">
+        <ul v-else class="h-[300px] overflow-y-auto w-full">
+            <li class="w-[400px]" v-for="(item, i) in links" :key="i">
                 <span class="text-white">{{ item.title }}</span>
                 <ul class="mt-2">
                     <li class="bg-yellow-400 py-2 px-8 rounded mb-4" v-for="(link, j) in item.links" :key="j">

@@ -1,14 +1,20 @@
 <template>
+    <Transition>
+        <div v-if="linkCopied" class="absolute top-0 text-[12px] bg-green-500 py-1 w-[50%] text-center rounded-b">
+            لینک پوشه دانلود کپی شد
+        </div>
+    </Transition>
   <button class="text-white bg-secondary py-2 px-4 rounded" @click="emit('return')">بازگشت</button>
     <LoadingSVG v-if="isLoading"/>
     <div v-else>
-        <ul v-if="props.type === 'series'" class="h-[300px] overflow-y-auto w-full">
+        <ul v-if="props.type === 'series'" class="h-[300px] overflow-y-auto w-full pl-2">
             <li class="w-[400px]" v-for="(item, i) in links" :key="i">
                 <span class="text-white">{{ item.title }}</span>
                 <span v-html="item.details" class="flex gap-3 text-green-400"></span>
                 <ul class="mt-2">
-                    <li class="bg-yellow-400 py-2 px-8 rounded mb-4 flex justify-between" v-for="(link, j) in item.links" :key="j">
+                    <li class="bg-yellow-400 py-2 px-8 rounded mb-4 flex justify-between items-center" v-for="(link, j) in item.links" :key="j">
                         <a :href="link.link">{{ link.spans }}</a>
+                        <button ref="copyButton" @click="copy(link.link)" class="bg-blue-500 text-white py-1 px-4 rounded">کپی</button>
                     </li>
                 </ul>
             </li>
@@ -27,9 +33,10 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import {onMounted, ref, toRef} from 'vue'
 import type Ref from 'vue'
 import LoadingSVG from "@/assets/icons/LoadingSVG.vue";
+import {$ref} from "vue/macros";
 
 const props = defineProps<{
   href: string
@@ -38,7 +45,9 @@ const props = defineProps<{
 
 const emit = defineEmits(['return'])
 const links: Ref<Array<any>> = ref([])
-const isLoading = ref(true)
+const isLoading = ref(true);
+const copyButton = ref([]);
+const linkCopied = ref(false);
 
 onMounted(() => {
   if (props.type === 'movie') {
@@ -48,6 +57,14 @@ onMounted(() => {
   }
 })
 
+function copy(textToCopy) {
+    navigator.clipboard.writeText(textToCopy);
+    linkCopied.value = true;
+
+    setTimeout(() => {
+        linkCopied.value = false
+    }, 3000);
+}
 function fetchMovie() {
   fetch('https://api.allorigins.win/raw?url=' + props.href).then((res) =>
     res.text().then((body) => {
@@ -119,6 +136,17 @@ function fetchSeries() {
 </script>
 
 <style scoped>
+
+.v-enter-active,
+.v-leave-active {
+    transition: top 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+    top: 0;
+}
+
 svg {
     margin: 0 !important;
     padding: 0 !important;

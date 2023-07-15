@@ -1,5 +1,5 @@
 <template>
-    <Transition>
+    <Transition name="show">
         <div v-if="linkCopied" class="absolute top-0 text-[12px] bg-green-500 py-1 w-[50%] text-center rounded-b">
             لینک پوشه دانلود کپی شد
         </div>
@@ -36,7 +36,6 @@
 import {onMounted, ref, toRef} from 'vue'
 import type Ref from 'vue'
 import LoadingSVG from "@/assets/icons/LoadingSVG.vue";
-import {$ref} from "vue/macros";
 
 const props = defineProps<{
   href: string
@@ -63,7 +62,7 @@ function copy(textToCopy) {
 
     setTimeout(() => {
         linkCopied.value = false
-    }, 3000);
+    }, 700);
 }
 function fetchMovie() {
   fetch('https://api.allorigins.win/raw?url=' + props.href).then((res) =>
@@ -137,15 +136,21 @@ function fetchSeries() {
 
 <style scoped>
 
-.v-enter-active,
-.v-leave-active {
-    transition: top 0.5s ease;
+.show-enter-active {
+    animation: show .5s;
+}
+.show-leave-active {
+    animation: show .5s reverse;
+}
+@keyframes show {
+    0% {
+        top: -40px;
+    }
+    100% {
+        top: 0;
+    }
 }
 
-.v-enter-from,
-.v-leave-to {
-    top: 0;
-}
 
 svg {
     margin: 0 !important;

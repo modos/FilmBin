@@ -1,11 +1,11 @@
 <template>
     <button class="text-white bg-secondary py-2 px-4 rounded" @click="emit('return')">بازگشت</button>
-  <ul class="flex gap-1 w-[75%] h-[500px] overflow-y-auto flex-wrap justify-between">
+  <ul class="flex gap-2 w-[90%] h-[500px] overflow-y-auto flex-wrap justify-between">
     <li
       @click="select(item.link, item.title)"
       v-for="(item, i) in items"
       :key="i"
-      class="bg-secondary rounded flex flex-col items-center text-white overflow-hidden cursor-pointer w-[30%] h-[250px]"
+      class="bg-secondary rounded flex flex-col items-center text-white overflow-hidden cursor-pointer w-[32%] h-[260px]"
     >
       <img :src="item.thumb" alt="" />
       <span class="mr-1 text-sm">{{ item.title }}</span>

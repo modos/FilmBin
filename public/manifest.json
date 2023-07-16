@@ -6,5 +6,11 @@
   "action": {
     "default_popup": "index.html"
   },
+  "icons": {
+    "16": "logo16.png",
+    "32": "logo32.png",
+    "48": "logo48.png",
+    "128": "logo128.png"
+  },
   "host_permissions": ["https://*/"]
 }

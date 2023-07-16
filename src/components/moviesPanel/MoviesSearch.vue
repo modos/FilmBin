@@ -3,7 +3,7 @@
     type="search"
     v-model="query"
     @change="search"
-    placeholder="نام فیلم و سریال رو جستجو کنید..."
+    placeholder="نام فیلم،سریال،بازیگر یا کارگردان رو جستجو کنید..."
     class="w-[75%] px-8 py-4 rounded"
   />
   <LoadingSVG v-if="isLoading" />
@@ -14,7 +14,7 @@
 import type { Ref } from 'vue'
 import { computed, ref } from 'vue'
 import type movieSearchResultItem from '@/interfaces/moviesSearchResultsInterface'
-import LoadingSVG from '@/assets/icons/LoadingSVG.vue'
+import LoadingSVG from '@/components/icons/LoadingSVG.vue'
 
 const emit = defineEmits(['results', 'startSearch'])
 const isLoading: Ref<boolean> = ref(false)

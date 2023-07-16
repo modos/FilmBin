@@ -35,7 +35,7 @@
 <script setup lang="ts">
 import {onMounted, ref, toRef} from 'vue'
 import type Ref from 'vue'
-import LoadingSVG from "@/assets/icons/LoadingSVG.vue";
+import LoadingSVG from "@/components/icons/LoadingSVG.vue";
 
 const props = defineProps<{
   href: string

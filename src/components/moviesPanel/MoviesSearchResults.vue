@@ -16,7 +16,7 @@
 <script setup lang="ts">
 import type movieSearchResultItem from '@/interfaces/moviesSearchResultsInterface';
 import type Ref from "vue";
-import {ref} from "vue";
+import {onMounted, onUnmounted, ref} from "vue";
 
 defineProps<{
     items: Array<movieSearchResultItem>
@@ -24,6 +24,7 @@ defineProps<{
 
 const emit = defineEmits(['return', 'select'])
 const selectedItemType: Ref<string> = ref('movie');
+
 function select(link: string, title: string) {
     if (title.includes("سریال")) {
         selectedItemType.value = "series"

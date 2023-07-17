@@ -24,7 +24,7 @@ const isLoading: Ref<boolean> = ref(false)
 const query: Ref<string> = ref('')
 const baseUrl = computed(
   () =>
-    `https://api.allorigins.win/raw?url=https://9movie.cfd/wp-json/wp/v2/posts?search=${query.value}&search_columns=post_title&per_page=100&page=1`
+    `https://api.allorigins.win/raw?url=https://9movie.cfd/wp-json/wp/v2/posts?search=${query.value}&search_columns=post_title&per_page=100`
 )
 const items: Ref<Array<movieSearchResultItem>> = ref([])
 

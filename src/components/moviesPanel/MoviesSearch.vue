@@ -6,8 +6,10 @@
     placeholder="نام فیلم،سریال،بازیگر یا کارگردان رو جستجو کنید..."
     class="w-[75%] px-8 py-4 rounded"
   />
-  <LoadingSVG v-if="isLoading" />
-  <button v-else class="bg-secondary py-2 px-4 text-white rounded w-[50%]">جستجو</button>
+  <div class="w-[25%] flex justify-center h-[5%]">
+      <LoadingSVG v-if="isLoading" />
+      <button v-else class="bg-secondary text-white rounded w-full">جستجو</button>
+  </div>
 </template>
 
 <script setup lang="ts">

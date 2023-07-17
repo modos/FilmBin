@@ -13,7 +13,7 @@
                 <span v-html="item.details" class="flex gap-3 text-green-400"></span>
                 <ul class="mt-2">
                     <li class="bg-yellow-400 py-2 px-8 rounded mb-4 flex justify-between items-center" v-for="(link, j) in item.links" :key="j">
-                        <a :href="link.link">{{ link.spans }}</a>
+                        <span>{{ link.spans }}</span>
                         <button ref="copyButton" @click="copy(link.link)" class="bg-blue-500 text-white py-1 px-4 rounded">کپی</button>
                     </li>
                 </ul>
@@ -23,8 +23,9 @@
             <li class="w-[400px]" v-for="(item, i) in links" :key="i">
                 <span class="text-white">{{ item.title }}</span>
                 <ul class="mt-2">
-                    <li class="bg-yellow-400 py-2 px-8 rounded mb-4" v-for="(link, j) in item.links" :key="j">
-                        <a :href="link.link">{{ link.title }}</a>
+                    <li class="bg-yellow-400 py-2 px-8 rounded mb-4 flex justify-between items-center" v-for="(link, j) in item.links" :key="j">
+                        <span>{{ link.title }}</span>
+                        <a ref="copyButton" :href="link.link" class="bg-blue-500 text-white py-1 px-4 rounded">دانلود</a>
                     </li>
                 </ul>
             </li>

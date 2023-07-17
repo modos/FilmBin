@@ -1,6 +1,6 @@
 <template>
   <div class="bg-primary h-[calc(100dvh)] flex flex-col items-center justify-center gap-3">
-      <img src="../assets/logo.png" width="200" height="200" alt=""/>
+      <img v-if="showingPanel === 'search'" src="../assets/logo.png" width="200" height="200" alt=""/>
     <MoviesSearch v-if="showingPanel === 'search'" @results="showResults" @start-search="isLoading = true"/>
     <MoviesSearchResults
       ref="scrollComponent"

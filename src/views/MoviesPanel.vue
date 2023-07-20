@@ -1,7 +1,7 @@
 <template>
   <div class="bg-primary h-[calc(100dvh)] flex flex-col items-center justify-center gap-3">
       <img v-if="showingPanel === 'search'" src="../assets/logo.png" width="200" height="200" alt=""/>
-    <MoviesSearch v-if="showingPanel === 'search'" @results="showResults" @start-search="isLoading = true"/>
+    <MoviesSearch v-if="showingPanel === 'search'" @results="showResults"/>
     <MoviesSearchResults
       ref="scrollComponent"
       v-else-if="showingPanel === 'results'"
@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import type Ref from 'vue'
+import type {Ref} from 'vue'
 import { ref } from 'vue'
 import MoviesSearch from '@/components/moviesPanel/MoviesSearch.vue'
 import MoviesSearchResults from '@/components/moviesPanel/MoviesSearchResults.vue'
@@ -27,7 +27,7 @@ import type movieSearchResultItem from '@/interfaces/moviesSearchResultsInterfac
 import SingleItem from '@/components/moviesPanel/SingleItem.vue'
 const searchResults: Ref<Array<movieSearchResultItem>> = ref([])
 const showingPanel: Ref<string> = ref('search')
-const selectedItemType: Ref<boolean> = ref('movie')
+const selectedItemType = ref<string>('movie')
 const href: Ref<string> = ref('')
 const scrollComponent = ref(null)
 

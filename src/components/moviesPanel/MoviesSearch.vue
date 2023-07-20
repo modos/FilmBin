@@ -8,6 +8,7 @@
   />
   <div class="w-[25%] flex justify-center h-[5%]">
       <LoadingSVG v-if="isLoading" />
+      <span class="text-white text-sm" v-else-if="isError">مشکلی پیش اومده! لطفا دوباره تلاش کنید</span>
       <button v-else class="bg-secondary text-white rounded w-full">جستجو</button>
   </div>
 </template>
@@ -18,8 +19,9 @@ import { computed, ref } from 'vue'
 import type movieSearchResultItem from '@/interfaces/moviesSearchResultsInterface'
 import LoadingSVG from '@/components/icons/LoadingSVG.vue'
 
-const emit = defineEmits(['results', 'startSearch'])
+const emit = defineEmits(['results'])
 const isLoading: Ref<boolean> = ref(false)
+const isError: Ref<boolean> = ref(false)
 
 const query: Ref<string> = ref('')
 const baseUrl = computed(
@@ -49,7 +51,10 @@ function search() {
     .then(() => {
       isLoading.value = false
       emit('results', items.value)
-    })
+    }).catch(() => {
+      isLoading.value = false
+        isError.value = true
+  })
 }
 </script>
 

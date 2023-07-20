@@ -34,8 +34,8 @@
 </template>
 
 <script setup lang="ts">
-import {onMounted, ref, toRef} from 'vue'
-import type Ref from 'vue'
+import {onMounted, ref} from 'vue'
+import type {Ref} from 'vue'
 import LoadingSVG from "@/components/icons/LoadingSVG.vue";
 
 const props = defineProps<{
@@ -57,7 +57,7 @@ onMounted(() => {
   }
 })
 
-function copy(textToCopy) {
+function copy(textToCopy: string) {
     navigator.clipboard.writeText(textToCopy);
     linkCopied.value = true;
 
@@ -70,31 +70,31 @@ function fetchMovie() {
     res.text().then((body) => {
       const parser = new DOMParser()
       const d = parser.parseFromString(body, 'text/html')
-      for (let index = 0; index < d.querySelectorAll('.m9tlg').length; index++) {
+      for (let index = 0; index < d?.querySelectorAll('.m9tlg')?.length; index++) {
         const nested = []
         for (
           let j = 0;
-          j < d.querySelectorAll('.m9cgl')[index].querySelectorAll('.LinkWrapper').length;
+          j < d?.querySelectorAll('.m9cgl')[index]?.querySelectorAll('.LinkWrapper')?.length;
           j++
         ) {
           nested.push({
             link: d
-              .querySelectorAll('.m9cgl')
-              [index].querySelectorAll('.LinkWrapper')
-              [j].getElementsByTagName('a')[0]?.href,
+              ?.querySelectorAll('.m9cgl')
+              [index]?.querySelectorAll('.LinkWrapper')
+              [j]?.getElementsByTagName('a')[0]?.href,
             title: d
-              .querySelectorAll('.m9cgl')
-              [index].querySelectorAll('.LinkWrapper')
-              [j].getElementsByTagName('a')[0]?.innerText,
+              ?.querySelectorAll('.m9cgl')
+              [index]?.querySelectorAll('.LinkWrapper')
+              [j]?.getElementsByTagName('a')[0]?.innerText,
             size: d
-              .querySelectorAll('.m9cgl')
-              [index].querySelectorAll('.LinkWrapper')
-              [j].getElementsByTagName('span')[1]?.innerText
+              ?.querySelectorAll('.m9cgl')
+              [index]?.querySelectorAll('.LinkWrapper')
+              [j]?.getElementsByTagName('span')[1]?.innerText
           })
         }
 
         links.value.push({
-          title: d.querySelectorAll('.m9tlg')[index].querySelector('h3').innerText,
+          title: d?.querySelectorAll('.m9tlg')[index]?.querySelector('h3')?.innerText,
           links: nested
         })
       }
@@ -109,23 +109,23 @@ function fetchSeries() {
     res.text().then((body) => {
       const parser = new DOMParser()
       const d = parser.parseFromString(body, 'text/html')
-      for (let index = 0; index < d.querySelectorAll('.m9seriedl').length; index++) {
+      for (let index = 0; index < d?.querySelectorAll('.m9seriedl')?.length; index++) {
         const nested = []
         for (
           let j = 0;
-          j < d.querySelectorAll('.m9seriedl')[index].getElementsByTagName('a').length;
+          j < d?.querySelectorAll('.m9seriedl')[index]?.getElementsByTagName('a')?.length;
           j++
         ) {
           nested.push({
-            link: d.querySelectorAll('.m9seriedl')[index].getElementsByTagName('a')[j].href,
-            spans: d.querySelectorAll('.m9seriedl')[index].getElementsByTagName('a')[j].innerText,
+            link: d?.querySelectorAll('.m9seriedl')[index]?.getElementsByTagName('a')[j]?.href,
+            spans: d?.querySelectorAll('.m9seriedl')[index]?.getElementsByTagName('a')[j]?.innerText,
           })
         }
         links.value.push({
-          title: d.querySelectorAll('.m9seriedl')[index].childNodes[0].querySelector('h3')
-            .innerText,
+          title: (d?.querySelectorAll('.m9seriedl')[index]?.childNodes[0] as HTMLElement)?.querySelector('h3')
+            ?.innerText,
           links: nested,
-            details: d.querySelectorAll('.m9tlg')[index].getElementsByTagName('span')[0].innerHTML
+            details: d?.querySelectorAll('.m9tlg')[index]?.getElementsByTagName('span')[0]?.innerHTML
         })
       }
     })

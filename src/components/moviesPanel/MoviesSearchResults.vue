@@ -1,6 +1,6 @@
 <template>
     <button class="text-white bg-secondary py-2 px-4 rounded" @click="emit('return')">بازگشت</button>
-  <ul class="flex gap-2 w-[90%] h-[500px] pl-1 overflow-y-auto flex-wrap justify-between">
+  <ul v-if="items.length" class="flex gap-2 w-[90%] h-[500px] pl-1 overflow-y-auto flex-wrap justify-between">
     <li
       @click="select(item.link, item.title)"
       v-for="(item, i) in items"
@@ -11,6 +11,7 @@
       <span class="mr-1 text-sm">{{ item.title }}</span>
     </li>
   </ul>
+  <span v-else class="text-white">موردی وجود ندارد!</span>
 </template>
 
 <script setup lang="ts">
@@ -23,7 +24,7 @@ defineProps<{
 }>()
 
 const emit = defineEmits(['return', 'select'])
-const selectedItemType: Ref<string> = ref('movie');
+const selectedItemType = ref<string>('movie');
 
 function select(link: string, title: string) {
     if (title.includes("سریال")) {

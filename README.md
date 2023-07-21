@@ -3,13 +3,15 @@
 Chrome Extension for Downloading Movies and TV Shows for Free.
 
 ## Screenshots
-<img src="./img.png" width="250" height="400" alt=""/>
+<div style="display:flex">
+    <img src="./img.png" width="250" height="400" alt=""/>
 <img src="./img_1.png" width="250" height="400" alt=""/>
 <img src="./img_2.png" width="250" height="400" alt=""/>
 <img src="./img_4.png" width="250" height="400" alt=""/>
+</div>
 
 ## Tools
-. Vue 3 (Composition API)
+. Vue 3 (Composition API)<br>
 . Typescript
 
 ## Todo

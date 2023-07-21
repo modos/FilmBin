@@ -1,10 +1,13 @@
 {
   "manifest_version": 3,
-  "name": "Megashark",
+  "name": "Filmbin",
   "description": "Free Download Movies and Tv Shows",
   "version": "1.0",
   "action": {
     "default_popup": "index.html"
+  },
+  "icons": {
+    "128": "icon128.png"
   },
   "host_permissions": ["https://*/"]
 }

@@ -16,24 +16,21 @@
 
 <script setup lang="ts">
 import type movieSearchResultItem from '@/interfaces/moviesSearchResultsInterface';
-import type Ref from "vue";
 import {ref} from "vue";
 
 defineProps<{
     items: Array<movieSearchResultItem>
-}>()
+}>();
 
-const emit = defineEmits(['return', 'select'])
+const emit = defineEmits(['return', 'select']);
 const selectedItemType = ref<string>('movie');
 
 function select(link: string, title: string) {
     if (title.includes("سریال")) {
-        selectedItemType.value = "series"
+        selectedItemType.value = "series";
     }else {
-        selectedItemType.value = "movie"
+        selectedItemType.value = "movie";
     }
     emit('select', {link, selectedItemType});
 }
 </script>
-
-<style scoped></style>

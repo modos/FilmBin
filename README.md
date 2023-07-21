@@ -1,5 +1,7 @@
 # FilmBin
 
+<img src="./src/assets/logo.png"/>
+
 Chrome Extension for Downloading Movies and TV Shows for Free.
 
 ## How To Run

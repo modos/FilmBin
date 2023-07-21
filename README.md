@@ -1,6 +1,19 @@
-# megashark
+# FilmBin
 
-This template should help get you started developing with Vue 3 in Vite.
+Chrome Extension for Downloading Movies and TV Shows for Free.
+
+## Screenshots
+<img src="./img.png" width="250" height="400" alt=""/>
+<img src="./img_1.png" width="250" height="400" alt=""/>
+<img src="./img_2.png" width="250" height="400" alt=""/>
+<img src="./img_4.png" width="250" height="400" alt=""/>
+
+## Tools
+. Vue 3 (Composition API)
+. Typescript
+
+## Todo
+. Write Tests
 
 ## Recommended IDE Setup
 

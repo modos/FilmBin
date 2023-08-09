@@ -1,15 +1,27 @@
 # FilmBin
 
+<img src="./src/assets/logo.png"/>
+
 Chrome Extension for Downloading Movies and TV Shows for Free.
 
+## How To Run
+1. download Dist.rar file (https://github.com/modos/FilmBin/releases/download/v1.0.0/dist.rar)
+2. extract it on your system (make sure you won't delete it later)
+3. click on extension icon in chrome, then click "Mange extensions"
+4. click on "developer mode" on top right
+5. click on "Load unpacked" then choose the extracted dist folder"
+6. run it and enjoy! (you can run it on microsoft edge too)
+
 ## Screenshots
-<img src="./img.png" width="250" height="400" alt=""/>
+<div style="display:flex">
+    <img src="./img.png" width="250" height="400" alt=""/>
 <img src="./img_1.png" width="250" height="400" alt=""/>
 <img src="./img_2.png" width="250" height="400" alt=""/>
 <img src="./img_4.png" width="250" height="400" alt=""/>
+</div>
 
 ## Tools
-. Vue 3 (Composition API)
+. Vue 3 (Composition API)<br>
 . Typescript
 
 ## Todo

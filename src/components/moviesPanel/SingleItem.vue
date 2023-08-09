@@ -37,6 +37,8 @@
 import {onMounted, ref} from 'vue';
 import type {Ref} from 'vue';
 import LoadingSVG from "@/components/icons/LoadingSVG.vue";
+import {fetchMovieLinks} from "@/utils/fetchMovieLinks";
+import {fetchSeriesLinks} from "@/utils/fetchSeriesLinks";
 
 const props = defineProps<{
   href: string
@@ -65,73 +67,17 @@ function copy(textToCopy: string) {
         linkCopied.value = false;
     }, 700);
 }
-function fetchMovie() {
-  fetch('https://api.allorigins.win/raw?url=' + props.href).then((res) =>
-    res.text().then((body) => {
-      const parser = new DOMParser();
-      const d = parser.parseFromString(body, 'text/html');
-      for (let index = 0; index < d?.querySelectorAll('.m9tlg')?.length; index++) {
-        const nested = [];
-        for (
-          let j = 0;
-          j < d?.querySelectorAll('.m9cgl')[index]?.querySelectorAll('.LinkWrapper')?.length;
-          j++
-        ) {
-          nested.push({
-            link: d
-              ?.querySelectorAll('.m9cgl')
-              [index]?.querySelectorAll('.LinkWrapper')
-              [j]?.getElementsByTagName('a')[0]?.href,
-            title: d
-              ?.querySelectorAll('.m9cgl')
-              [index]?.querySelectorAll('.LinkWrapper')
-              [j]?.getElementsByTagName('a')[0]?.innerText,
-            size: d
-              ?.querySelectorAll('.m9cgl')
-              [index]?.querySelectorAll('.LinkWrapper')
-              [j]?.getElementsByTagName('span')[1]?.innerText
-          });
-        }
-
-        links.value.push({
-          title: d?.querySelectorAll('.m9tlg')[index]?.querySelector('h3')?.innerText,
-          links: nested
-        });
-      }
-    })
-  ).then(() => {
-      isLoading.value = false;
-  });
+async function fetchMovie() {
+   const {data} = await fetchMovieLinks(props.href);
+   links.value = data.value;
+   isLoading.value = false;
 }
 
-function fetchSeries() {
-  fetch('https://api.allorigins.win/raw?url=' + props.href).then((res) =>
-    res.text().then((body) => {
-      const parser = new DOMParser();
-      const d = parser.parseFromString(body, 'text/html');
-      for (let index = 0; index < d?.querySelectorAll('.m9seriedl')?.length; index++) {
-        const nested = [];
-        for (
-          let j = 0;
-          j < d?.querySelectorAll('.m9seriedl')[index]?.getElementsByTagName('a')?.length;
-          j++
-        ) {
-          nested.push({
-            link: d?.querySelectorAll('.m9seriedl')[index]?.getElementsByTagName('a')[j]?.href,
-            spans: d?.querySelectorAll('.m9seriedl')[index]?.getElementsByTagName('a')[j]?.innerText,
-          });
-        }
-        links.value.push({
-          title: (d?.querySelectorAll('.m9seriedl')[index]?.childNodes[0] as HTMLElement)?.querySelector('h3')
-            ?.innerText,
-          links: nested,
-            details: d?.querySelectorAll('.m9tlg')[index]?.getElementsByTagName('span')[0]?.innerHTML
-        });
-      }
-    })
-  ).then(() => {
-      isLoading.value = false;
-  });
+async function fetchSeries() {
+    const {data} = await fetchSeriesLinks(props.href);
+    links.value = data.value;
+    isLoading.value = false;
+
 }
 </script>
 

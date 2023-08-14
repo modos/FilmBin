@@ -19,8 +19,8 @@ Chrome Extension for Downloading Movies and TV Shows for Free.
 
 ## Tools
 . Vue 3 (Composition API)<br>
-. Typescript
-- E2E & component test with cypress
+. Typescript<br>
+. E2E & component test with cypress
 
 ## Recommended IDE Setup
 
